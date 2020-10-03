@@ -21,6 +21,10 @@ header {
   header .header-icon {
     max-width: 23px;
     max-height: 23px; }
+  header .header-icon:hover {
+    background-color: #f5f7f7;
+    border-radius: 50%;
+    cursor: pointer; }
   header .lg {
     max-width: 30px;
     max-height: 30px; }
@@ -48,8 +52,9 @@ header {
   header .middle {
     flex: 5;
     position: relative;
-    width: 60%; }
+    width: 100%; }
     header .middle #search {
+      position: relative;
       background: url("../images/search-icon.png") no-repeat;
       background-size: 18px;
       background-position: left center;
@@ -65,26 +70,39 @@ header {
       outline: none;
       min-width: 240px;
       max-width: 600px;
-      width: 90%; }
+      width: 100%; }
       header .middle #search:focus {
         border: none;
         background-color: transparent;
         box-shadow: 0 1px 1px 2px lightgray; }
-    header .middle #clear-search {
+    header .middle .clear-search {
       position: absolute;
-      top: 20px;
-      right: 85px;
+      top: 15px;
+      right: 15%;
+      font-size: 20px;
       visibility: hidden; }
+    header .middle .clear-search-visible {
+      visibility: visible; }
+    header .middle .clear-search-visible:hover {
+      cursor: pointer;
+      font-size: 21px;
+      transition: linear 0.2s; }
     header .middle .match-list {
       position: absolute;
       width: 100%;
-      height: 50px; }
+      z-index: 99; }
     header .middle em {
       color: #b9b6b6; }
     header .middle .result {
-      width: 100%;
-      margin: 0;
-      padding: 5px; }
+      width: 90%;
+      border: 0.5px solid #f0f0f0;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      background-color: #f5f7f7;
+      z-index: 100;
+      min-width: 240px;
+      max-width: 600px;
+      width: 100%; }
       header .middle .result .searchList {
         text-decoration: none;
         color: #5c5a5a;
@@ -94,17 +112,17 @@ header {
         display: block; }
         header .middle .result .searchList .fas fa-envelope {
           margin: 2px, 10px, 2px, 2px;
-          padding: 2px; }
+          padding: 0 10px; }
         header .middle .result .searchList .searchL {
           margin-left: 5px; }
         header .middle .result .searchList .searchp {
           margin: 0;
           padding-left: 18px; }
       header .middle .result .searchList:hover {
-        background-color: lightgray; }
-    header .middle .result:hover {
-      background-color: lightgray;
-      border-radius: 10px; }
+        background-color: #e8e8e8;
+        border-radius: 8px; }
+      header .middle .result .searchList:not(:last-of-type) {
+        border-bottom: 0.5px solid #f0efef; }
 
 hr {
   border: 0;

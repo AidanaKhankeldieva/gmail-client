@@ -17,7 +17,7 @@ const trash = document.querySelector(".trash");
 const star = document.querySelector(".starred");
 const spam = document.querySelector(".spam");
 const envelope = document.querySelector(".fa-envelope-open");
-const input = document.querySelector("#search");
+
 const emailDiv = document.querySelector(".email");
 const rangeOfMessagesElement = document.querySelector(".num-of-pages span") 
 const totalMessagesElement = document.querySelector(".num-of-pages .total");
@@ -68,6 +68,16 @@ trash.addEventListener('click', function(){
   });
 });
 
+const mainMenu = document.querySelector(".main-menu");
+const pagination = document.querySelector("#pagination");
+const senderMain = document.querySelector("#sender");
+const subjectMain = document.querySelector("#subject");
+const searchBar = document.querySelector('#search');
+const matchList = document.querySelector('.match-list')
+const middle = document.querySelector('.middle');
+const result = document.querySelector('.result');
+const searchList = document.querySelectorAll('.searchList');
+const clearSearch = document.querySelector('.clear-search');
 
 // EVENT LISTENERS
 social.addEventListener("click", () => {
@@ -232,13 +242,7 @@ function openClose(e) {
 
 // Askat end
 //const messagesAPI = '../api.json';
-const mainMenu = document.querySelector(".main-menu");
-const pagination = document.querySelector("#pagination");
-const senderMain = document.querySelector("#sender");
-const subjectMain = document.querySelector("#subject");
-const searchBar = document.querySelector('#search');
-const matchList = document.querySelector('.match-list')
-const middle = document.querySelector('.middle');
+
 
 
 // let messages = [];
@@ -474,70 +478,65 @@ const middle = document.querySelector('.middle');
     ]
 
     console.log(itemsListData);
-
     
- 
-
-const getObject = function(itemsListData){
- itemsListData.forEach(function(email){
- let firstdiv = document.createElement('div')
- matchList.appendChild()
-
- //     
- for(let i = 0; i < itemsListData.length; i++){
-    if(inputVal.length > 0 && inputVal !== ""){
-        if(itemsListData[i].senderName.toLowerCase().includes(inputVal) || itemsListData[i].senderEmail.toLowerCase().includes(inputVal) || itemsListData[i].messageTitle.toLowerCase().includes(inputVal)){
-            matchList.innerHTML += `<div class="result">
-            <a href="#" class="searchList">
-            <i class="fas fa-envelope"></i>
-            <span class="searchl">${itemsListData[i].messageTitle}</span>
-            <p class="searchp"> 
-            <em class="italic">from:  </em>
-            ${itemsListData[i].senderName} &nbsp; <em class="italic">email: </em>${itemsListData[i].senderEmail}
-            </p> 
-            </a> 
-            </div`
-                }           
-    }else {
-        matchList.innerHTML = "";
-    }
- 
-            
-}
- })
-}
-
-    searchBar.addEventListener('input', (e) => {
-       const inputVal = e.target.value.toLowerCase();  
-        console.log(inputVal);
-        getObject();
-   
-    });
+    function getFiltered(inp){
   
-   // let items = [];
-    // let myObj = {};
-    
-    
-    
-    //  const showObject = function(){
-    //     console.log(myObj);
-    //  }
+       
+    }
 
-// fetch('https://polar-reaches-49806.herokuapp.com/api?page=1&category=primary')
-//  .then(function(resp){
-//      return resp.json();
-//  })
-//   .then(function(data){
-//      // console.log(data);
-//       items = data.items;
-//       myObj = data;
-//       showObj;
-//       showObject();
-//       //console.log(items[1].senderName);
+    
 
-//   });
+    
+    searchBar.addEventListener('input', (e) => {
+    const inputVal = e.target.value.toLowerCase();  
+      console.log(`showing input: ${inputVal}`)
+     
+      if(inputVal.length > 0 && inputVal !== ''){
+          //clear x 
+          clearSearch.classList.add('clear-search-visible');
+    
+        const temp = itemsListData.filter(function(msg){
+            return msg.senderName.toLowerCase().includes(inputVal) || 
+            msg.senderEmail.toLowerCase().includes(inputVal) || 
+            msg.messageTitle.toLowerCase().includes(inputVal)
+        }).map(function(listOfmsg){
+            return `<div class="result">
+                        <a href="#" class="searchList">
+                        <i class="fas fa-envelope"></i>
+                        <span class="searchl">${listOfmsg.messageTitle}</span>
+                        <p class="searchp"> 
+                        <em class="italic">from:  </em>
+                        ${listOfmsg.senderName} &nbsp; <em class="italic">email: </em>${listOfmsg.senderEmail}
+                        </p> 
+                        </a> 
+                        </div`
+        }).join('');
+        matchList.innerHTML = temp;
+        console.log(`this is temp arr = ${temp}`)
 
-///Aidana's code end
+      }else{
+          matchList.innerHTML = '';
+          
+          
+      }
+
+      //clear search
+
+      clearSearch.addEventListener('click', function(){
+        searchBar.value = '';
+        matchList.innerHTML = '';
+        clearSearch.classList.remove('clear-search-visible');
+    });
+ 
+
+    });
+
+    searchList.addEventListener('click', function(){
+        alert('You clicked');
+        console.log(`You clicked on message!`);
+    })
+
+  
 
 const test = "This is a text";
 document.querySelector(".compose").addEventListener("click", composeBtn);
