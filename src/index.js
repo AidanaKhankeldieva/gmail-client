@@ -560,7 +560,7 @@ function openClose(e) {
           
       }
 
-      //clear search
+      //clear search //
 
       clearSearch.addEventListener('click', function(){
         searchBar.value = '';
@@ -571,10 +571,10 @@ function openClose(e) {
 
     });
 
-    searchList.addEventListener('click', function(){
-        alert('You clicked');
-        console.log(`You clicked on message!`);
-    })
+    // searchList.addEventListener('click', function(){
+    //     alert('You clicked');
+    //     console.log(`You clicked on message!`);
+    // })
 
   
 
