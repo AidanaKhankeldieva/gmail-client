@@ -11,7 +11,7 @@ fetchApi("promotions");
 const primary = document.querySelector(".primary");
 const social = document.querySelector(".social");
 const promo = document.querySelector(".promotions");
-const inbox = document.querySelector('.inbox');
+const inbox = document.querySelector(".inbox");
 const emails = document.querySelector(".emails");
 const trash = document.querySelector(".trash");
 const star = document.querySelector(".starred");
@@ -23,33 +23,33 @@ const rangeOfMessagesElement = document.querySelector(".num-of-pages span");
 const totalMessagesElement = document.querySelector(".num-of-pages .total");
 
 // Inbox
-inbox.addEventListener('click', function () {
+inbox.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
+  document.querySelector(".emails").textContent = "";
   dataobj[type].items.forEach(function (email, index) {
     if (!email.tags.isTrash) {
       createEmailList(email, index);
-      console.log('test');
+      console.log("test");
     }
   });
 });
 
 //Spam
-spam.addEventListener('click', function () {
+spam.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
+  document.querySelector(".emails").textContent = "";
   dataobj[type].items.forEach(function (email, index) {
     if (!email.tags.isSpam) {
       createEmailList(email, index);
-      console.log('test');
+      console.log("test");
     }
   });
 });
 
 //Starred box
-star.addEventListener('click', function () {
+star.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
+  document.querySelector(".emails").textContent = "";
   dataobj[type].items.forEach(function (email, index) {
     if (email.tags.isStarred) {
       createEmailList(email, index);
@@ -58,9 +58,9 @@ star.addEventListener('click', function () {
 });
 
 //Trash box
-trash.addEventListener('click', function () {
+trash.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
+  document.querySelector(".emails").textContent = "";
   dataobj[type].items.forEach(function (email, index) {
     if (email.tags.isTrash) {
       createEmailList(email, index);
@@ -95,6 +95,7 @@ promo.addEventListener("click", () => {
 
 emails.addEventListener("click", deleteOrRead);
 
+// FETCH DATA
 function fetchApi(category = "primary") {
   // tabSwitch(category);
   fetch(`https://polar-reaches-49806.herokuapp.com/api?page=1&category=${category}`).then(data => data.json()).then(data => dataFetch(data, category));
@@ -103,6 +104,7 @@ function fetchApi(category = "primary") {
   }
 }
 
+// HELPER FUNCTIONS
 function listToUi(data, category) {
   tabSwitch(category);
   document.querySelector(".emails").textContent = "";
@@ -208,12 +210,45 @@ function deleteOrRead(e) {
   } else {
     for (let key in dataobj[category].items) {
       if (e.target.id == key) {
-        console.log("delete", category);
+        console.log("delete", category, key);
         // openEmail(dataobj[category].items[key]);
-        // readEmail(category, key);
+        readEmail(category, key);
+        openEmail(dataobj, key);
       }
     }
   }
+}
+
+function readEmail(category, id) {
+  console.log(dataobj[category].items[id].isRead);
+  dataobj[category].items[id].isRead = true;
+}
+
+function openEmail(data, id) {
+  document.querySelector(".emails").textContent = "";
+  let type = activeTab();
+  let letterContent = document.createElement("div");
+  dataobj[type].items.forEach(function (email, index) {
+    if (index == id) {
+      let senderName = document.createElement("p");
+      senderName.textContent = email.senderName;
+      let senderMail = document.createElement("p");
+      senderMail.textContent = email.senderEmail;
+      let msgTitle = document.createElement("p");
+      msgTitle.textContent = email.messageTitle;
+      // let msgAttach = document.createElement('img')
+      // msgAttach.src = email.messages[0].attachments[0].icon
+      let msgText = document.createElement("p");
+      msgText.textContent = email.messages[0].message;
+
+      letterContent.appendChild(senderName);
+      letterContent.appendChild(senderMail);
+      letterContent.appendChild(msgTitle);
+      // letterContent.appendChild(msgAttach)
+      letterContent.appendChild(msgText);
+    }
+  });
+  emails.appendChild(letterContent);
 }
 
 function openClose(e) {
@@ -228,7 +263,82 @@ function openClose(e) {
 
 // Askat end
 //const messagesAPI = '../api.json';
+<<<<<<< HEAD
 
+=======
+const mainMenu = document.querySelector(".main-menu");
+const pagination = document.querySelector("#pagination");
+const senderMain = document.querySelector("#sender");
+const subjectMain = document.querySelector("#subject");
+const searchBar = document.querySelector("#search");
+const matchList = document.querySelector("#match-list");
+const middle = document.querySelector(".middle");
+
+// let messages = [];
+// const msgDivMain = document.querySelector(".messages");
+// msgDivMain.style.display = 'none';
+
+// function showMainMenu(checkBox) {
+
+// }
+// //api read
+// async function readMessages() {
+//     const response = await fetch(messagesAPI);
+//     const msgData = await response.json();
+//     //fill with messages
+//     messages = msgData["items"];
+//     const msgLimit = msgData["next"]["limit"];
+//     fillPagination(msgData, msgLimit);
+//     fillMainMsgs(msgLimit);
+//     addListeners();
+// }
+
+// const fillPagination = (msgData, msgLimit) => {
+//     const totalMsg = msgData["total"];
+//     const paginationString = `1-${msgLimit} of ${totalMsg}`;
+//     pagination.textContent = paginationString;
+// }
+
+// const fillMainMsgs = msgLimit => {
+//     for (let i = 0; i < msgLimit; i++) {
+//         const {
+//             senderName,
+//             messageTitle
+//         } = messages[i];
+
+//         var messageEl = msgDivMain.cloneNode(true);
+//         messageEl.style.display = "block"; //make the element visible
+//         messageEl.querySelector('#sender').textContent = senderName;
+//         messageEl.querySelector('#subject').textContent = messageTitle;
+//         document.querySelector(".main-msgs").appendChild(messageEl);
+//     }
+// }
+
+// readMessages().then(response => {
+//     console.log('messages API successful retrieval')
+// }).
+// catch(err => {
+//     console.error(err);
+// })
+
+// function addListeners() {
+//     setTimeout(() => {
+//         console.log('working interval')
+//         let checkBoxes = document.querySelectorAll('.check');
+//         checkBoxes.forEach(elem => {
+//             elem.addEventListener('click', (e) => {
+//                 let checked = e.target.checked;
+//                 console.log('check clicked')
+//                 if (checked) {
+//                     mainMenu.style.visibility = 'visible';
+//                 } else {
+//                     mainMenu.style.visibility = 'hidden';
+//                 }
+//             });
+//         })
+//     }, 1000);
+// }
+>>>>>>> f24c43b9de52755e1769593c1285e9975c389392
 
 // let messages = [];
 // const msgDivMain = document.querySelector(".messages");
@@ -525,11 +635,11 @@ function clickAngleChat() {
 }
 
 //-------------MAIN PART - AZIZ, KANYKEI-----
-let leftArrow = document.querySelector('.fa-angle-left');
-let rightArrow = document.querySelector('.fa-angle-right');
+let leftArrow = document.querySelector(".fa-angle-left");
+let rightArrow = document.querySelector(".fa-angle-right");
 
-leftArrow.addEventListener('click', goBack);
-rightArrow.addEventListener('click', goForth);
+leftArrow.addEventListener("click", goBack);
+rightArrow.addEventListener("click", goForth);
 
 function goBack() {
   let currentTab = activeTab();
@@ -547,7 +657,7 @@ function goForth() {
     return;
   }
 
-  let totalMessages = dataobj[currentTab]['items'].length;
+  let totalMessages = dataobj[currentTab]["items"].length;
   if (messagesStartIndex + messagesLimitOnPage < totalMessages && totalMessages !== undefined) {
     messagesStartIndex += messagesLimitOnPage;
     listToUi(dataobj, currentTab);
@@ -555,7 +665,7 @@ function goForth() {
 }
 
 setTimeout(() => {
-  console.log('dataOBJ');
+  console.log("dataOBJ");
   console.log(dataobj);
 }, 1000);
 

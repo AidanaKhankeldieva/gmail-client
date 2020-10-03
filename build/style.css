@@ -2,7 +2,8 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Open Sans"; }
+  font-family: "Open Sans";
+  overflow: hidden; }
 
 * {
   box-sizing: border-box; }
@@ -47,8 +48,8 @@ header {
     justify-content: flex-end;
     align-items: center;
     flex: 1; }
-    header .right img {
-      margin: 0 10px; }
+    header .right i {
+      color: grey; }
   header .middle {
     flex: 5;
     position: relative;
@@ -231,7 +232,7 @@ hr {
   display: block;
   position: absolute;
   right: 97.5%;
-  bottom: 18%; }
+  bottom: 18.5%; }
 
 .aside-footer {
   margin-top: 20px;
@@ -465,7 +466,8 @@ main .page .pagination .num-of-pages {
   font-size: 12px; }
 
 main .page .pagination .keyboard {
-  position: relative; }
+  position: relative;
+  color: #7f7f7f; }
 
 main .page .pagination .keyboard .fa-caret-down {
   position: absolute;

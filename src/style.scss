@@ -15,6 +15,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Open Sans";
+  overflow: hidden;
 }
 * {
   box-sizing: border-box;
@@ -72,8 +73,8 @@ header {
     justify-content: flex-end;
     align-items: center;
     flex: 1;
-    img {
-      margin: 0 10px;
+    i {
+      color: grey;
     }
   }
  
@@ -325,7 +326,7 @@ hr {
   display: block;
   position: absolute;
   right: 97.5%;
-  bottom: 18%;
+  bottom: 18.5%;
 }
 
 // Aside footer
@@ -609,6 +610,7 @@ main .page .pagination .num-of-pages {
 }
 main .page .pagination .keyboard {
   position: relative;
+  color: #7f7f7f;
 }
 main .page .pagination .keyboard .fa-caret-down {
   position: absolute;
@@ -722,6 +724,91 @@ main .scroll .email .email-msg p {
 main .scroll .email .email-date-wrapper {
   padding-left: 20px;
 }
+
+//email letter content
+// .email-content-letter{
+//   display: none;
+// }
+// .emial-opened{
+//   position: absolute;
+//   top:80px;
+//   left: 250px;
+//   i{
+//     color: grey;
+//   }:hover {
+//     background-color: lightgrey;
+//   }
+// }
+// .email-title-text i{
+  
+// }
+// .email-sender{
+//   position: absolute;
+//   top: 100px;
+//   left: 250px;
+//   display: inline-block;
+// }
+
+// .main-email-content {
+//   font-family: sans-serif;
+//   background: lightgrey;
+//   position: absolute;
+//   top: 200px;
+//   right: 150px;
+//   width: 68%;
+//   text-align: center;
+//   .right-link{
+//     float: right;
+//     padding: 10px;
+//   }
+//   p{
+//     font-size: 15px;
+//     padding: 20px;
+//   }
+//   button{
+//     width: 60%;
+//     height: 50px;
+//     text-align: center;
+//     background-color: #42d4bd;
+//     color: #ffffff;
+//     border-radius: 50px;
+//     border: none;
+//     font-size: 18px;
+//     font-weight: bold;
+//     position: relative;
+//     left: 30%;
+//     transform: translateX(-50%);
+//     cursor: pointer; 
+//   }
+// }
+// .email-content-text{
+//   text-align: left;
+// }
+
+// .email-content-cover{
+//   background-image: url('https://www.seytech.co/images/logo.png');
+//   background-size: 30%;
+//   background-repeat: no-repeat;
+//   width: 100%;
+//   height: 250px;
+//   margin-top: 30px;
+//   margin-left: 350px;
+// }
+// .email-content{
+//   background-color:#E8E8E8;
+//   margin-top: 30px;
+// }
+
+// .email-content-remark{
+//   color: grey;
+//   font-size: 12px;
+// }
+
+// .buttons{
+//   position: absolute;
+//   bottom: 10px;
+//   left: 350px;
+// }
 
 // main {
 //   display: inline-block;

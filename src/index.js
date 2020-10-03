@@ -11,7 +11,7 @@ fetchApi("promotions");
 const primary = document.querySelector(".primary");
 const social = document.querySelector(".social");
 const promo = document.querySelector(".promotions");
-const inbox = document.querySelector('.inbox')
+const inbox = document.querySelector(".inbox");
 const emails = document.querySelector(".emails");
 const trash = document.querySelector(".trash");
 const star = document.querySelector(".starred");
@@ -19,55 +19,56 @@ const spam = document.querySelector(".spam");
 const envelope = document.querySelector(".fa-envelope-open");
 
 const emailDiv = document.querySelector(".email");
-const rangeOfMessagesElement = document.querySelector(".num-of-pages span") 
+const rangeOfMessagesElement = document.querySelector(".num-of-pages span");
 const totalMessagesElement = document.querySelector(".num-of-pages .total");
 
 // Inbox
-inbox.addEventListener('click', function(){
+inbox.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
-  dataobj[type].items.forEach(function(email, index){
-    if(!email.tags.isTrash){
-      createEmailList(email, index)
-      console.log('test')
+  document.querySelector(".emails").textContent = "";
+  dataobj[type].items.forEach(function (email, index) {
+    if (!email.tags.isTrash) {
+      createEmailList(email, index);
+      console.log("test");
     }
   });
 });
 
 //Spam
-spam.addEventListener('click', function(){
+spam.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
-  dataobj[type].items.forEach(function(email, index){
-    if(!email.tags.isSpam){
-      createEmailList(email, index)
-      console.log('test')
+  document.querySelector(".emails").textContent = "";
+  dataobj[type].items.forEach(function (email, index) {
+    if (!email.tags.isSpam) {
+      createEmailList(email, index);
+      console.log("test");
     }
   });
 });
 
 //Starred box
-star.addEventListener('click', function(){
+star.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
-  dataobj[type].items.forEach(function(email, index){
-    if(email.tags.isStarred){
-      createEmailList(email, index)
+  document.querySelector(".emails").textContent = "";
+  dataobj[type].items.forEach(function (email, index) {
+    if (email.tags.isStarred) {
+      createEmailList(email, index);
     }
   });
 });
 
 //Trash box
-trash.addEventListener('click', function(){
+trash.addEventListener("click", function () {
   let type = activeTab();
-  document.querySelector('.emails').textContent = '';
-  dataobj[type].items.forEach(function (email, index){
-    if(email.tags.isTrash){
-      createEmailList(email,index)
+  document.querySelector(".emails").textContent = "";
+  dataobj[type].items.forEach(function (email, index) {
+    if (email.tags.isTrash) {
+      createEmailList(email, index);
     }
   });
 });
 
+<<<<<<< HEAD
 const mainMenu = document.querySelector(".main-menu");
 const pagination = document.querySelector("#pagination");
 const senderMain = document.querySelector("#sender");
@@ -79,22 +80,25 @@ const result = document.querySelector('.result');
 const searchList = document.querySelectorAll('.searchList');
 const clearSearch = document.querySelector('.clear-search');
 
+=======
+>>>>>>> f24c43b9de52755e1769593c1285e9975c389392
 // EVENT LISTENERS
 social.addEventListener("click", () => {
   messagesStartIndex = 0; //reset the startIndex
-  listToUi(dataobj, "social")
+  listToUi(dataobj, "social");
 });
 primary.addEventListener("click", () => {
   messagesStartIndex = 0;
-  listToUi(dataobj, "primary")
+  listToUi(dataobj, "primary");
 });
 promo.addEventListener("click", () => {
   messagesStartIndex = 0;
-  listToUi(dataobj, "promotions")
+  listToUi(dataobj, "promotions");
 });
 
 emails.addEventListener("click", deleteOrRead);
 
+// FETCH DATA
 function fetchApi(category = "primary") {
   // tabSwitch(category);
   fetch(
@@ -107,16 +111,19 @@ function fetchApi(category = "primary") {
   }
 }
 
+// HELPER FUNCTIONS
 function listToUi(data, category) {
   tabSwitch(category);
   document.querySelector(".emails").textContent = "";
-totalMessagesElement.innerText = data[category].items.length;
-  data[category].items.slice(messagesStartIndex, messagesLimitOnPage + messagesStartIndex).forEach((item, index) => {
-    if (!item.tags.isTrash) {
-      // console.log("listing");
-      createEmailList(item, index);
-    }
-  });
+  totalMessagesElement.innerText = data[category].items.length;
+  data[category].items
+    .slice(messagesStartIndex, messagesLimitOnPage + messagesStartIndex)
+    .forEach((item, index) => {
+      if (!item.tags.isTrash) {
+        // console.log("listing");
+        createEmailList(item, index);
+      }
+    });
 }
 
 function tabSwitch(category) {
@@ -222,12 +229,45 @@ function deleteOrRead(e) {
   } else {
     for (let key in dataobj[category].items) {
       if (e.target.id == key) {
-        console.log("delete", category);
+        console.log("delete", category, key);
         // openEmail(dataobj[category].items[key]);
-        // readEmail(category, key);
+        readEmail(category, key);
+        openEmail(dataobj, key);
       }
     }
   }
+}
+
+function readEmail(category, id) {
+  console.log(dataobj[category].items[id].isRead);
+  dataobj[category].items[id].isRead = true;
+}
+
+function openEmail(data, id) {
+  document.querySelector(".emails").textContent = "";
+  let type = activeTab();
+  let letterContent = document.createElement("div");
+  dataobj[type].items.forEach(function (email, index) {
+    if (index == id) {
+      let senderName = document.createElement("p");
+      senderName.textContent = email.senderName;
+      let senderMail = document.createElement("p");
+      senderMail.textContent = email.senderEmail;
+      let msgTitle = document.createElement("p");
+      msgTitle.textContent = email.messageTitle;
+      // let msgAttach = document.createElement('img')
+      // msgAttach.src = email.messages[0].attachments[0].icon
+      let msgText = document.createElement("p");
+      msgText.textContent = email.messages[0].message;
+
+      letterContent.appendChild(senderName);
+      letterContent.appendChild(senderMail);
+      letterContent.appendChild(msgTitle);
+      // letterContent.appendChild(msgAttach)
+      letterContent.appendChild(msgText);
+    }
+  });
+  emails.appendChild(letterContent);
 }
 
 function openClose(e) {
@@ -587,11 +627,11 @@ function clickAngleChat() {
 }
 
 //-------------MAIN PART - AZIZ, KANYKEI-----
-let leftArrow = document.querySelector('.fa-angle-left');
-let rightArrow = document.querySelector('.fa-angle-right');
+let leftArrow = document.querySelector(".fa-angle-left");
+let rightArrow = document.querySelector(".fa-angle-right");
 
-leftArrow.addEventListener('click', goBack);
-rightArrow.addEventListener('click', goForth);
+leftArrow.addEventListener("click", goBack);
+rightArrow.addEventListener("click", goForth);
 
 function goBack() {
   let currentTab = activeTab();
@@ -609,15 +649,18 @@ function goForth() {
     return;
   }
 
-  let totalMessages = dataobj[currentTab]['items'].length;
-  if (messagesStartIndex+messagesLimitOnPage < totalMessages && totalMessages !== undefined) {
+  let totalMessages = dataobj[currentTab]["items"].length;
+  if (
+    messagesStartIndex + messagesLimitOnPage < totalMessages &&
+    totalMessages !== undefined
+  ) {
     messagesStartIndex += messagesLimitOnPage;
     listToUi(dataobj, currentTab);
   }
 }
 
 setTimeout(() => {
-  console.log('dataOBJ')
+  console.log("dataOBJ");
   console.log(dataobj);
 }, 1000);
 
