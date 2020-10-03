@@ -321,6 +321,7 @@ hr {
 }
 .aside-footer {
   i {
+    color: grey;
     &:hover {
       background-color: lightgrey;
     }
@@ -621,6 +622,8 @@ main .scroll .email {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
   cursor: pointer;
 }
 main .scroll .email:hover {
@@ -634,7 +637,7 @@ main .scroll .email .hover-icons {
   position: absolute;
   top: 0;
   right: 0;
-  width: 80px;
+  width: 150px;
   height: 100%;
   background-color: #fff;
   display: none;
