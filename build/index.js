@@ -263,9 +263,7 @@ function openClose(e) {
 
 // Askat end
 //const messagesAPI = '../api.json';
-<<<<<<< HEAD
 
-=======
 const mainMenu = document.querySelector(".main-menu");
 const pagination = document.querySelector("#pagination");
 const senderMain = document.querySelector("#sender");
@@ -338,7 +336,7 @@ const middle = document.querySelector(".middle");
 //         })
 //     }, 1000);
 // }
->>>>>>> f24c43b9de52755e1769593c1285e9975c389392
+
 
 // let messages = [];
 // const msgDivMain = document.querySelector(".messages");
